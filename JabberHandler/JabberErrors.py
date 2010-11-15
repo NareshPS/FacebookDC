@@ -1,3 +1,5 @@
+#! /usr/bin/env python
+
 """ This class defines common errors for JabberHandler"""
 class JabberErrors:
 	
