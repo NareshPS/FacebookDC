@@ -16,13 +16,15 @@ class JabberHandler:
 	jPass			= None
 	jData			= None
 
-	def __init__(self, jUser, jPass):
+	def __init__(self, jUser, jPass, jDomain, jDebug=True):
 		""" Initializes the Jabber Protocol for jUser"""
 		
 		self.jUser		= jUser
 		self.jPass		= jPass
+		self.jDomain	= jDomain
+		self.jDebug		= jDebug
 		self.jId		= xmpp.protocol.JID(jUser)
-		self.jClient	= xmpp.Client(self.jId.getDomain())
+		self.jClient	= xmpp.Client(jDomain)
 
 	def Connect(self):
 		""" Initialzes to Jabber connection"""
@@ -31,16 +33,21 @@ class JabberHandler:
 		self.jCon		= self.jClient.connect()
 
 		if not self.jCon:
-			print 'Connect Error: Code', self.jJabberErrors.getConnectionError()
+			if self.jDebug is True:
+				print 'Connect Error: Code', self.jJabberErrors.getConnectionError()
 			return self.jJabberErrors.getConnectionError()
 
 		self.jAuth	= self.jClient.auth(self.jId.getNode(), self.jPass, resource=self.jId.getResource(), sasl=0)
 
 		if not self.jAuth:
-			print 'Auth Error: Code', self.jJabberErrors.getAuthError()
+			if self.jDebug is True:
+				print 'Auth Error: Code', self.jJabberErrors.getAuthError()
 			return self.jJabberErrors.getAuthError()
 
 		return self.jJabberErrors.getSuccessCode()
+
+	def Present(self):
+		self.jClient.sendInitPresence(requestRoster=0)
 
 	def FetchData(self, dataType):
 		roster		= self.jClient.getRoster()
