@@ -1,8 +1,8 @@
 import FBUser
 import FBDBConnect
 
-access_token    = '154808361231346|2.rtqNG_HiVeYiFOjUbpfR7w__.3600.1290906000-508175635|tRcJucvzAfnKJjNLC510I2kUv44'
-db_filename     = 'C:/Stuffs/My Documents/My Dropbox/Workspace/pyDCHub/db/db.sqlite'
+access_token    = '154808361231346|2.KV6Q5xwebmuwmsWZdIC7zw__.3600.1290909600-508175635|zDTFW9uqmB4AlkhXFg-ktFzMpT0'
+db_filename     = 'C:/Stuffs/www/db.sqlite'#'C:/Stuffs/My Documents/My Dropbox/Workspace/pyDCHub/db/db.sqlite'
 
 user    = FBUser.FBUser(access_token)
 print user.fetchFriends()
